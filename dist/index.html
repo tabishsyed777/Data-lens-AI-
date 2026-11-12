@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Private, browser-local CSV data quality analysis.">
+  <title>DataLens AI | Data Quality Copilot</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="DataLens AI home"><span class="brand-mark">✦</span> DataLens <em>AI</em></a>
+    <div class="privacy-badge">🔒 Analysis stays in your browser</div>
+  </header>
+  <main id="top">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">DATA QUALITY, EXPLAINED</p>
+        <h1>Find what your data<br><span>is trying to hide.</span></h1>
+        <p class="lede">A local-first copilot for CSV quality checks. Get clear signals, reasons, and next steps before data reaches a model or decision.</p>
+      </div>
+      <div class="hero-stat"><span>Zero uploads</span><strong>100%</strong><small>browser-local analysis</small></div>
+    </section>
+
+    <section id="start" class="upload-card" aria-labelledby="upload-title">
+      <div class="upload-copy"><p class="eyebrow">START AN ANALYSIS</p><h2 id="upload-title">Bring a CSV. Leave with answers.</h2><p>Files are parsed only in this tab. Nothing is sent to a server.</p></div>
+      <label class="drop-zone" id="drop-zone" for="file-input">
+        <input id="file-input" type="file" accept=".csv,text/csv" hidden>
+        <span class="upload-icon">↑</span><strong>Drop your CSV here</strong><small>or choose a file from your computer</small>
+      </label>
+      <div class="upload-actions"><button class="text-button" id="demo-button">Try with sample data →</button><p>CSV only · up to 25 MB</p></div>
+      <p id="upload-error" class="error" role="alert" hidden></p>
+    </section>
+
+    <section id="results" hidden aria-live="polite">
+      <div class="dataset-head"><div><p class="eyebrow">DATASET OVERVIEW</p><h2 id="dataset-name">-</h2><p id="dataset-meta">-</p></div><div class="toolbar"><button class="secondary" id="new-button">Analyze another file</button><button class="primary" id="download-button">Download report ↓</button></div></div>
+      <div class="score-grid">
+        <article class="quality-score"><div class="ring" id="score-ring"><strong id="quality-score">--</strong><span>/100</span></div><div><p class="label">QUALITY SCORE</p><h3 id="score-label">Analyzing</h3><p id="score-summary">-</p></div></article>
+        <article class="metric"><span class="metric-icon coral">◌</span><div><strong id="missing-count">-</strong><span>Missing cells</span></div></article>
+        <article class="metric"><span class="metric-icon amber">⊞</span><div><strong id="duplicate-count">-</strong><span>Duplicate rows</span></div></article>
+        <article class="metric"><span class="metric-icon blue">⌁</span><div><strong id="outlier-count">-</strong><span>Possible outliers</span></div></article>
+      </div>
+      <div class="two-col">
+        <article class="panel"><div class="panel-title"><div><p class="eyebrow">PRIORITIES</p><h3>What needs attention</h3></div><span id="issue-total" class="count-badge">0</span></div><div id="priorities" class="priorities"></div></article>
+        <article class="panel"><div class="panel-title"><div><p class="eyebrow">COLUMN HEALTH</p><h3>At a glance</h3></div></div><div id="health-bars" class="health-bars"></div></article>
+      </div>
+      <article class="panel columns-panel"><div class="panel-title"><div><p class="eyebrow">DATA DICTIONARY</p><h3>Column diagnostics</h3></div><div class="legend"><i class="dot good"></i> Good <i class="dot warn"></i> Review <i class="dot risk"></i> Attention</div></div><div class="table-wrap"><table><thead><tr><th>Column</th><th>Detected type</th><th>Completeness</th><th>Distinct</th><th>Signals</th><th>Recommended action</th></tr></thead><tbody id="column-table"></tbody></table></div></article>
+      <p class="method-note">DataLens uses transparent heuristics: missingness, exact duplicate rows, IQR numeric outliers, categorical concentration, type consistency, and column-name/value patterns that may indicate sensitive data. Signals require human review.</p>
+    </section>
+  </main>
+  <footer>DataLens AI · Explainable checks, local analysis, human judgment.</footer>
+  <script src="app.js"></script>
+</body>
+</html>
